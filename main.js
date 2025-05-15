@@ -1,16 +1,28 @@
-let numButtons = document.querySelectorAll('button')
-numButtons.forEach((button) => button.addEventListener('click',numberClick))
-
-let displayScreen = document.getElementById("displayScreen")
-
-function numberClick(e){
-    if (displayScreen.innerText.length < 8){
-        displayScreen.innerText += e.srcElement.innerText
-        console.log(displayScreen.innerText)
+class Calculator{
+    constructor(currentDisplay,previousNumber,displayScreen){
+        this.currentDisplay = currentDisplay
+        this.previousNumber = previousNumber
+        this.displayScreen = displayScreen
+        
+        
     }
-    else {
-       displayScreen.innerText= displayScreen.innerText.slice(1)
-       displayScreen.innerText += e.srcElement.innerText
+    numClick(e){
+        console.log(this.previousNumber)
+        this.currentDisplay += e.target.value
+        this.displayScreen.innerText = this.currentDisplay
+        
     }
-    
+    operatorClick(e){
+        this.previousNumber = this.currentDisplay
+        this.currentDisplay = e.target.value
+        this.displayScreen.innerText = this.currentDisplay
+    }
 }
+
+const displayScreen = document.getElementById('displayScreen')
+let numButtons = document.querySelectorAll('.numButton')
+let operatorButtons = document.querySelectorAll('.operator')
+const calculator = new Calculator('',0,displayScreen)
+
+numButtons.forEach((button) => button.addEventListener('click',(e) => calculator.numClick(e)))
+operatorButtons.forEach((button)=> button.addEventListener('click', (e)=> calculator.operatorClick(e)))

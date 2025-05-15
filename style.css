@@ -39,6 +39,7 @@ body{
     align-items: flex-end;
     justify-content: flex-end;
     font-size: 5em;
+    flex-wrap: wrap;
 }
 #buttonPad{
     display: flex;
@@ -58,4 +59,7 @@ button{
     border-radius: 50%;
     font-size: 3.4em;
     font-style:bold;
+}
+button:hover{
+    background: lightsalmon;
 }
