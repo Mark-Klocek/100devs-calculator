@@ -17,6 +17,9 @@ class Calculator{
         this.currentDisplay = e.target.value
         this.displayScreen.innerText = this.currentDisplay
     }
+    equalsClick(e){
+        
+    }
 }
 
 const displayScreen = document.getElementById('displayScreen')
