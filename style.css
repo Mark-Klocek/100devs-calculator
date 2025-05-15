@@ -31,10 +31,14 @@ body{
     
 }
 #displayScreen{
-    
+    display: flex;
     height: 18%;
     background: white;
     width: 85%;
+    color: black;
+    align-items: flex-end;
+    justify-content: flex-end;
+    font-size: 5em;
 }
 #buttonPad{
     display: flex;
