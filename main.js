@@ -1,22 +1,3 @@
-// === TO DO ===
-// - Prevent operator input if an operator is already on the display
-// - Create `this.equalsClick()`:
-//     • Takes `this.previousNumber`, `this.operator`, and `this.currentDisplay`
-//     • Performs the correct calculation
-//     • Updates `this.currentDisplay` with the result
-//     • Sets `this.previousNumber = this.currentDisplay`
-//     • Resets `this.operator` to an empty string
-// - Add functionality for the decimal point ('.') button:
-//     • If `!this.currentDisplay.includes('.')`, add '.'
-//     • Else, do nothing
-
-
-
-
-
-
-
-
 class Calculator{
     constructor(currentDisplay,previousNumber,displayScreen){
         this.currentDisplay = currentDisplay
@@ -62,3 +43,16 @@ const calculator = new Calculator('',0,displayScreen)
 
 numButtons.forEach((button) => button.addEventListener('click',(e) => calculator.numClick(e)))
 operatorButtons.forEach((button)=> button.addEventListener('click', (e)=> calculator.operatorClick(e)))
+
+//5-17-25//
+// === TO DO ===
+// - Prevent operator input if an operator is already on the display
+// - Create `this.equalsClick()`:
+//     • Takes `this.previousNumber`, `this.operator`, and `this.currentDisplay`
+//     • Performs the correct calculation
+//     • Updates `this.currentDisplay` with the result
+//     • Sets `this.previousNumber = this.currentDisplay`
+//     • Resets `this.operator` to an empty string
+// - Add functionality for the decimal point ('.') button:
+//     • If `!this.currentDisplay.includes('.')`, add '.'
+//     • Else, do nothing
