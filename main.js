@@ -5,6 +5,7 @@ class Calculator{
         this.displayScreen = displayScreen
         this.operator = ''
         this.equalsPressed = false
+        this.operatorPressed = false
         
         
     }
@@ -23,34 +24,43 @@ class Calculator{
         else{
             this.displayScreen.innerText += e.target.value
         }
+        this.operatorPressed = false
         
     }
     operatorClick(e){
         // Setting the operator to the value of the operator button clicked, then setting the previous number to what's currently on the screen (should be a number of maximum 6 numbers in length), then sets the inner text value to the current operator
-        this.operator = e.target.value
-        this.previousNumber = this.displayScreen.innerText
-        this.displayScreen.innerText = this.operator
+        if (this.operatorPressed == false){
+            this.operator = e.target.value
+            this.previousNumber = this.displayScreen.innerText
+            this.displayScreen.innerText = this.operator
+            this.operatorPressed = true
+        }
         console.log(`Previous number: ${this.previousNumber} \n Operator: ${this.operator}`)
         
     }
     equalsClick(e){
         if (this.operator == '+'){
             this.equalsPressed = true
-            this.displayScreen.innerText = Number(this.previousNumber) + Number(this.displayScreen.innerText) 
+            this.displayScreen.innerText = (Number(this.previousNumber) + Number(this.displayScreen.innerText)).toPrecision(6) 
         }
         if (this.operator == '-'){
             this.equalsPressed = true
-            this.displayScreen.innerText = Number(this.previousNumber) - Number(this.displayScreen.innerText) 
+            this.displayScreen.innerText = (Number(this.previousNumber) - Number(this.displayScreen.innerText)).toPrecision(6) 
         }
         if (this.operator == '/'){
             this.equalsPressed = true
-            this.displayScreen.innerText = Number(this.previousNumber) / Number(this.displayScreen.innerText) 
+            this.displayScreen.innerText = (Number(this.previousNumber) / Number(this.displayScreen.innerText)).toPrecision(6) 
         }
         if (this.operator == 'x'){
             this.equalsPressed = true
-            this.displayScreen.innerText = Number(this.previousNumber) * Number(this.displayScreen.innerText) 
+            this.displayScreen.innerText = (Number(this.previousNumber) * Number(this.displayScreen.innerText)).toPrecision(6)  
         }
 
+    }
+    periodClick(){
+        if (!this.displayScreen.innerText.includes('.')){
+            this.displayScreen.innerText += '.'
+        }
     }
 }
 
@@ -60,20 +70,47 @@ let numButtons = document.querySelectorAll('.numButton')
 let operatorButtons = document.querySelectorAll('.operator')
 let equalButton = document.getElementById('equals')
 const calculator = new Calculator('',0,displayScreen)
+let dotButton = document.getElementById('dotButton')
 
+dotButton.addEventListener('click',(e)=>calculator.periodClick(e))
 equalButton.addEventListener('click',(e)=>calculator.equalsClick(e))
 numButtons.forEach((button) => button.addEventListener('click',(e) => calculator.numClick(e)))
 operatorButtons.forEach((button)=> button.addEventListener('click', (e)=> calculator.operatorClick(e)))
 
 //5-17-25//
 // === TO DO ===
-// - Prevent operator input if an operator is already on the display
-// - Create `this.equalsClick()`:
-//     • Takes `this.previousNumber`, `this.operator`, and `this.currentDisplay`
-//     • Performs the correct calculation
-//     • Updates `this.currentDisplay` with the result
-//     • Sets `this.previousNumber = this.currentDisplay`
-//     • Resets `this.operator` to an empty string
-// - Add functionality for the decimal point ('.') button:
-//     • If `!this.currentDisplay.includes('.')`, add '.'
+// - Prevent operator input if an operator is already on the display *COMPLETE 
+// - Create `this.equalsClick()`: *COMPLETE 
+//     • Takes `this.previousNumber`, `this.operator`, and `this.currentDisplay` *COMPLETE 
+//     • Performs the correct calculation *COMPLETE 
+//     • Updates `this.currentDisplay` with the result *COMPLETE 
+//     • Sets `this.previousNumber = this.currentDisplay` *COMPLETE 
+//     • Resets `this.operator` to an empty string *COMPLETE 
+// - Add functionality for the decimal point ('.') button: *COMPLETE 
+//     • If `!this.currentDisplay.includes('.')`, add '.' *COMPLETE 
 //     • Else, do nothing
+
+//5-18-25//
+// === TO DO ===
+// - Add a smaller top row display:
+//     • Show previous input or operation (e.g., "12 +") above main number
+//     • Use smaller font and lighter color for distinction
+//     • Update when an operator is clicked
+
+// - Handle main number overflow:
+//     • If `this.currentDisplay.length > 9`, reduce font size
+//     • Dynamically shrink font but never below minimum threshold
+//     • Reset font size when display clears or shortens
+
+// - Prevent numbers from being pushed off screen:
+//     • Wrap display in a container with `overflow: hidden` or horizontal scroll
+//     • Use `text-align: right` to keep numbers aligned correctly
+//     • Consider using monospace font for visual consistency
+
+// - Ensure numbers stay on one line:
+//     • Apply `white-space: nowrap` to prevent wrapping
+
+// - Add test cases for overflow behavior:
+//     • Input long number sequences (e.g., '1234567890123')
+//     • Test long decimals and operations (e.g., '1234.5678 + 8765.4321')
+//     • Confirm layout and scaling behave as expected
