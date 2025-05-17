@@ -4,13 +4,15 @@ class Calculator{
         this.previousNumber = previousNumber
         this.displayScreen = displayScreen
         this.operator = ''
+        this.equalsPressed = false
         
         
     }
     numClick(e){
         //Checking to see if the display is currently holding at least 1 element, and that element is NOT a number (confirming it's an operator basically)
-        if (this.operator !== '' && isNaN(displayScreen.innerText)){
+        if (this.operator !== '' && isNaN(displayScreen.innerText) || this.equalsPressed == true){
             this.displayScreen.innerText = ''
+            this.equalsPressed = false
         }
         //Limits the number of characters on my display screen so it doesn't run out of the screen, kind of "rolls" the numbers by slicing the first one if a number is entered after the length is already max to mimick an actual calculator
         if (this.displayScreen.innerText.length >= 6){
@@ -32,15 +34,34 @@ class Calculator{
         
     }
     equalsClick(e){
-        
+        if (this.operator == '+'){
+            this.equalsPressed = true
+            this.displayScreen.innerText = Number(this.previousNumber) + Number(this.displayScreen.innerText) 
+        }
+        if (this.operator == '-'){
+            this.equalsPressed = true
+            this.displayScreen.innerText = Number(this.previousNumber) - Number(this.displayScreen.innerText) 
+        }
+        if (this.operator == '/'){
+            this.equalsPressed = true
+            this.displayScreen.innerText = Number(this.previousNumber) / Number(this.displayScreen.innerText) 
+        }
+        if (this.operator == 'x'){
+            this.equalsPressed = true
+            this.displayScreen.innerText = Number(this.previousNumber) * Number(this.displayScreen.innerText) 
+        }
+
     }
 }
-console.log(isNaN('+'))
+
+
 const displayScreen = document.getElementById('displayScreen')
 let numButtons = document.querySelectorAll('.numButton')
 let operatorButtons = document.querySelectorAll('.operator')
+let equalButton = document.getElementById('equals')
 const calculator = new Calculator('',0,displayScreen)
 
+equalButton.addEventListener('click',(e)=>calculator.equalsClick(e))
 numButtons.forEach((button) => button.addEventListener('click',(e) => calculator.numClick(e)))
 operatorButtons.forEach((button)=> button.addEventListener('click', (e)=> calculator.operatorClick(e)))
 
