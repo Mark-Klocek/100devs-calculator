@@ -126,11 +126,6 @@ operatorButtons.forEach((button)=> button.addEventListener('click', (e)=> calcul
 
 //5-18-25//
 // === TO DO ===
-// - Add a smaller top row display:
-//     • Show previous input or operation (e.g., "12 +") above main number
-//     • Use smaller font and lighter color for distinction
-//     • Update when an operator is clicked
-
 // - Handle main number overflow: *COMPLETE
 //     • If `this.currentDisplay.length > 9`, reduce font size *COMPLETE
 //     • Dynamically shrink font but never below minimum threshold *COMPLETE
@@ -148,3 +143,4 @@ operatorButtons.forEach((button)=> button.addEventListener('click', (e)=> calcul
 //     • Input long number sequences (e.g., '1234567890123') *COMPLETE
 //     • Test long decimals and operations (e.g., '1234.5678 + 8765.4321') *COMPLETE
 //     • Confirm layout and scaling behave as expected *COMPLETE
+
